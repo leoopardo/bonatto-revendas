@@ -1,3 +1,6 @@
+import { COLORS } from '@/theme/colors';
+import { AntdRegistry } from '@ant-design/nextjs-registry';
+import { ConfigProvider } from 'antd';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -10,15 +13,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <body
         style={{
-          backgroundColor: '#111',
+          backgroundColor: COLORS.base,
           color: '#fff',
           fontFamily: 'Arial, sans-serif',
+          padding: 0,
+          margin: 0,
         }}
       >
-        {children}
+        <AntdRegistry>{children}</AntdRegistry>
       </body>
     </html>
   );
