@@ -48,7 +48,7 @@ export default function RootLayout({
           }}
         ></div>
       </Content>
-      <Footer style={{ textAlign: 'center' }}>
+      <Footer style={{ textAlign: 'center', backgroundColor: COLORS.dark }}>
         Ant Design ©{new Date().getFullYear()} Created by Ant UED
       </Footer>
     </Layout>
