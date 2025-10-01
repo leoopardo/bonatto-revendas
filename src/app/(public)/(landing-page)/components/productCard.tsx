@@ -3,7 +3,7 @@
 import { COLORS } from '@/theme/colors';
 import { TOKENS } from '@/theme/tokens';
 import { Col, Row, Typography } from 'antd';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 type Product = {
   title: string;
@@ -26,10 +26,33 @@ export function ProductCard({
   height = '400px',
 }: ProductCardProps) {
   const [hovered, setHovered] = useState(false);
+  const [inView, setInView] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // IntersectionObserver para mobile
+  useEffect(() => {
+    if (isDesktop) return; // só mobile
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+        } else {
+          setInView(false);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (containerRef.current) observer.observe(containerRef.current);
+
+    return () => observer.disconnect();
+  }, [isDesktop]);
 
   return (
     <Col
       span={24}
+      ref={containerRef}
       style={{
         position: 'relative',
         overflow: 'hidden',
@@ -40,8 +63,8 @@ export function ProductCard({
         padding: '32px',
         cursor: 'pointer',
       }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseEnter={() => isDesktop && setHovered(true)}
+      onMouseLeave={() => isDesktop && setHovered(false)}
     >
       <div
         style={{
@@ -53,8 +76,14 @@ export function ProductCard({
           `,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          transition: 'transform 0.8s ease-in-out',
-          transform: hovered ? 'scale(1.1)' : 'scale(1)',
+          transition: 'transform 0.8s ease-out',
+          transform: isDesktop
+            ? hovered
+              ? 'scale(1.1)'
+              : 'scale(1)'
+            : inView
+            ? 'scale(1.2)'
+            : 'scale(1)',
         }}
       />
 

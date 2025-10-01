@@ -32,7 +32,7 @@ export default function LandingPage() {
 
   return (
     <Layout style={{ width: '100%', height: 'calc(100vh - 12dvh)' }}>
-      <Row style={{ height: '100%', width: '100%' }}>
+      <Row style={{ height: '100%', width: '100%', display: 'flex' }}>
         {products.map((product, index) => (
           <Col
             key={index}
