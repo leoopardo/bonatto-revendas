@@ -1,8 +1,8 @@
 import { COLORS } from '@/theme/colors';
-import { Breadcrumb, Flex, Layout, Menu } from 'antd';
+import { Layout } from 'antd';
 import { Content, Footer, Header } from 'antd/es/layout/layout';
 import type { Metadata } from 'next';
-import Image from 'next/image';
+import { SideMenu } from './components/menu';
 
 export const metadata: Metadata = {
   title: 'Bonatto revendas',
@@ -28,17 +28,18 @@ export default function RootLayout({
           backgroundColor: COLORS.primary,
           height: '12dvh',
           borderBottom: `12px solid ${COLORS.secondary}`,
+          gap: 4
         }}
       >
         <img
           src="https://i.imgur.com/7FaEC0r.png"
           alt="logo"
           style={{
-            height: '300px',
+            height: '250px',
           }}
         />
 
-        
+        <SideMenu />
       </Header>
       <Content style={{ minHeight: '90dvh', backgroundColor: '#e8e4da' }}>
         <div
@@ -48,8 +49,14 @@ export default function RootLayout({
           }}
         ></div>
       </Content>
-      <Footer style={{ textAlign: 'center', backgroundColor: COLORS.dark }}>
-        Ant Design ©{new Date().getFullYear()} Created by Ant UED
+      <Footer
+        style={{
+          textAlign: 'center',
+          backgroundColor: COLORS.dark,
+          color: '#fff',
+        }}
+      >
+        Bonatto revendas ©{new Date().getFullYear()} Created by @leoopardo
       </Footer>
     </Layout>
   );

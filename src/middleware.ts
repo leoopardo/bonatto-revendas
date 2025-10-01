@@ -1,10 +1,14 @@
 import { MiddlewareConfig, NextRequest, NextResponse } from 'next/server';
-import { jwtDecode } from 'jwt-decode';
 
 const publicRoutes = [
   { path: '/login', doWhenAuth: 'redirect' },
   { path: '/register', doWhenAuth: 'redirect' },
   { path: '/', doWhenAuth: 'skip' },
+  { path: '/tupperware', doWhenAuth: 'skip' },
+  { path: '/boticario', doWhenAuth: 'skip' },
+  { path: '/demillus', doWhenAuth: 'skip' },
+  { path: '/jequiti', doWhenAuth: 'skip' },
+
 ] as const;
 
 const REDIRECT_WHEN_NOT_AUTH_ROUTE = 'login';

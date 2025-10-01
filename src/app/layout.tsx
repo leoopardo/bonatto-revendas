@@ -23,7 +23,26 @@ export default function RootLayout({
           margin: 0,
         }}
       >
-        <AntdRegistry>{children}</AntdRegistry>
+        <AntdRegistry>
+          <ConfigProvider
+            theme={{
+              token: {
+                colorPrimary: COLORS.primary,
+                borderRadius: 24,
+                size: 24,
+              },
+              components: {
+                Menu: {
+                  colorText: '#fff',
+                  colorPrimary: COLORS.base,
+                  fontSize: 20,
+                },
+              },
+            }}
+          >
+            {children}
+          </ConfigProvider>
+        </AntdRegistry>
       </body>
     </html>
   );
