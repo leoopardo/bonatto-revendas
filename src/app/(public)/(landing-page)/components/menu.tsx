@@ -5,15 +5,12 @@ import useSearchStore from '@/store/searchStore';
 import { COLORS } from '@/theme/colors';
 import { TOKENS } from '@/theme/tokens';
 import {
-  AppstoreOutlined,
   CloseOutlined,
-  MailOutlined,
-  MenuFoldOutlined,
-  SettingOutlined,
+  MenuFoldOutlined
 } from '@ant-design/icons';
 import { AutoComplete, Button, Drawer, Input, Menu, MenuProps } from 'antd';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
