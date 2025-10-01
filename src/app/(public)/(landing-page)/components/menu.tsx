@@ -10,7 +10,7 @@ import {
 } from '@ant-design/icons';
 import { AutoComplete, Button, Drawer, Input, Menu, MenuProps } from 'antd';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -51,9 +51,13 @@ const items: MenuItem[] = [
 
 export const SideMenu = () => {
   const [open, setOpen] = useState(false);
-  const [current, setCurrent] = useState(window.location.pathname.split("/").join(""));
+  const [current, setCurrent] = useState('');
   const { isDesktop, isLargeDesktop } = useBreakpoints();
   const { search, setSearch } = useSearchStore();
+
+  useEffect(() => {
+    setCurrent(window.location.pathname.split("/").join(""));
+  }, []);
 
   console.log(window.location.pathname)
 
