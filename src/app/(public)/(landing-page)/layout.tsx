@@ -27,10 +27,11 @@ export default function RootLayout({
         }}
       >
         <img
-          src="https://i.imgur.com/7FaEC0r.png"
+          src="https://i.imgur.com/TZE9dkO.png"
           alt="logo"
           style={{
-            height: '300px',
+            height: 'calc(50px + 2dvw)',
+            paddingRight: 48
           }}
         />
 
