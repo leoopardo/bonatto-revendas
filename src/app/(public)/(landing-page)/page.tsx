@@ -1,474 +1,53 @@
 'use client';
 
 import { useBreakpoints } from '@/hooks/useBreakpoints';
-import { COLORS } from '@/theme/colors';
-import { TOKENS } from '@/theme/tokens';
-import { Col, Layout, Row, Typography } from 'antd';
+import { Layout, Row, Col } from 'antd';
+import { ProductCard } from './components/productCard';
 
 export default function LandingPage() {
   const { isDesktop, isLargeDesktop } = useBreakpoints();
+
+  const products = [
+    {
+      title: 'Harry Potter Hogwarts 2,25L Preto',
+      price: 'R$ 119,90',
+      promotionalPrice: 'R$ 89,90',
+      image:
+        'https://www.tupperware.com.br/cdn/shop/files/tw-864126-01.jpg?v=1755106499960',
+    },
+    {
+      title: 'Harry Potter 1,3L Colorido',
+      price: 'R$ 69,90',
+      promotionalPrice: 'R$ 74,90',
+      image:
+        'https://www.tupperware.com.br/cdn/shop/files/tw-864952_01.jpg?v=1757012853960',
+    },
+    {
+      title: 'Pote Tupperware Marvel Avengers 2,25L',
+      price: 'R$ 79,90',
+      image:
+        'https://www.tupperware.com.br/cdn/shop/files/tw-864950_01_0fb949b4-07f7-48e9-b4e9-a92a5e5e7deb.jpg?v=1757012769960',
+    },
+  ];
+
   return (
     <Layout style={{ width: '100%', height: 'calc(100vh - 12dvh)' }}>
       <Row style={{ height: '100%', width: '100%' }}>
-        <Col
-          md={12}
-          xs={24}
-          style={{
-            backgroundImage: `
-      linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0)),
-      url(https://www.tupperware.com.br/cdn/shop/files/tw-864949_02.jpg?v=1757012720960)
-    `,
-            backgroundSize: '100% 100%',
-            backgroundPosition: 'center',
-            height: !isDesktop ? '400px' : '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'flex-end',
-            padding: '32px',
-            transition: 'background-size 0.8s ease-in-out',
-            cursor: 'pointer',
-          }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.backgroundSize = '110% 110%';
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.backgroundSize = '100% 100%';
-          }}
-        >
-          <Row gutter={16}>
-            <Col xs={24} md={17}>
-              <Typography.Title
-                level={!isLargeDesktop ? 3 : 1}
-                style={{ color: '#fff' }}
-              >
-                Pote Tupperware Instantânea Mágica Harry Potter Hogwarts 2,25L
-                Preto
-              </Typography.Title>
-            </Col>
-            {isDesktop && (
-              <Col
-                span={7}
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  flexDirection: 'column',
-                  gap: 8,
-                }}
-              >
-                <Typography.Title
-                  style={{
-                    color: '#fff',
-                    backgroundColor: COLORS.primary,
-                    padding: 8,
-                    borderRadius: TOKENS.border_radius,
-                    margin: 0,
-                    width: 'fit-content',
-                  }}
-                  level={4}
-                >
-                  R$ 89,90
-                </Typography.Title>
-                <Typography.Title
-                  level={1}
-                  style={{
-                    color: '#fff',
-                    backgroundColor: COLORS.primary,
-                    padding: 8,
-                    borderRadius: TOKENS.border_radius,
-                    margin: 0,
-                    width: 'fit-content',
-                  }}
-                >
-                  R$ 89,90
-                </Typography.Title>
-              </Col>
-            )}
-          </Row>
-        </Col>
-        <Col xs={24} md={6} style={{ height: '100%', border: `5px solid ${COLORS.secondary}` }}>
+        {products.map((product, index) => (
           <Col
-            span={24}
-            style={{
-              backgroundImage: `
-      linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0)),
-      url(https://www.tupperware.com.br/cdn/shop/files/tw-864949_02.jpg?v=1757012720960)
-    `,
-              backgroundSize: '100% 100%',
-              backgroundPosition: 'center',
-              height: !isDesktop ? '400px' : '50%',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'flex-end',
-              padding: '32px',
-              transition: 'background-size 0.8s ease-in-out',
-              cursor: 'pointer',
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.backgroundSize =
-                '110% 110%';
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.backgroundSize =
-                '100% 100%';
-            }}
+            key={index}
+            xs={24}
+            md={8}
+            style={{ height: isDesktop ? '100%' : 'fit-content' }}
           >
-            <Row gutter={16}>
-              <Col xs={24} md={17}>
-                <Typography.Title
-                  level={!isLargeDesktop ? 5 : 4}
-                  style={{ color: '#fff' }}
-                >
-                  Pote Tupperware Instantânea Mágica Harry Potter Hogwarts 2,25L
-                  Preto
-                </Typography.Title>
-              </Col>
-              {isDesktop && (
-                <Col
-                  span={7}
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    flexDirection: 'column',
-                    gap: 8,
-                  }}
-                >
-                  <Typography.Title
-                    style={{
-                      color: '#fff',
-                      backgroundColor: COLORS.primary,
-                      padding: 8,
-                      borderRadius: TOKENS.border_radius,
-                      margin: 0,
-                      width: 'fit-content',
-                    }}
-                    level={5}
-                  >
-                    R$ 89,90
-                  </Typography.Title>
-                  <Typography.Title
-                    level={4}
-                    style={{
-                      color: '#fff',
-                      backgroundColor: COLORS.primary,
-                      padding: 8,
-                      borderRadius: TOKENS.border_radius,
-                      margin: 0,
-                      width: 'fit-content',
-                    }}
-                  >
-                    R$ 89,90
-                  </Typography.Title>
-                </Col>
-              )}
-            </Row>
+            <ProductCard
+              product={product}
+              isDesktop={isDesktop}
+              isLargeDesktop={isLargeDesktop}
+              height="100%"
+            />
           </Col>
-          <Col
-            span={24}
-            style={{
-              backgroundImage: `
-      linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0)),
-      url(https://www.tupperware.com.br/cdn/shop/files/tw-864949_02.jpg?v=1757012720960)
-    `,
-              backgroundSize: '100% 100%',
-              backgroundPosition: 'center',
-              height: !isDesktop ? '400px' : '50%',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'flex-end',
-              padding: '32px',
-              transition: 'background-size 0.8s ease-in-out',
-              cursor: 'pointer',
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.backgroundSize =
-                '110% 110%';
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.backgroundSize =
-                '100% 100%';
-            }}
-          >
-            <Row gutter={16}>
-              <Col xs={24} md={17}>
-                <Typography.Title
-                  level={!isLargeDesktop ? 5 : 4}
-                  style={{ color: '#fff' }}
-                >
-                  Pote Tupperware Instantânea Mágica Harry Potter Hogwarts 2,25L
-                  Preto
-                </Typography.Title>
-              </Col>
-              {isDesktop && (
-                <Col
-                  span={7}
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    flexDirection: 'column',
-                    gap: 8,
-                  }}
-                >
-                  <Typography.Title
-                    style={{
-                      color: '#fff',
-                      backgroundColor: COLORS.primary,
-                      padding: 8,
-                      borderRadius: TOKENS.border_radius,
-                      margin: 0,
-                      width: 'fit-content',
-                    }}
-                    level={5}
-                  >
-                    R$ 89,90
-                  </Typography.Title>
-                  <Typography.Title
-                    level={4}
-                    style={{
-                      color: '#fff',
-                      backgroundColor: COLORS.primary,
-                      padding: 8,
-                      borderRadius: TOKENS.border_radius,
-                      margin: 0,
-                      width: 'fit-content',
-                    }}
-                  >
-                    R$ 89,90
-                  </Typography.Title>
-                </Col>
-              )}
-            </Row>
-          </Col>
-        </Col>
-        <Col xs={24} md={6} style={{ height: '100%', border: `5px solid ${COLORS.secondary}` }}>
-          <Col
-            span={24}
-            style={{
-              backgroundImage: `
-      linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0)),
-      url(https://www.tupperware.com.br/cdn/shop/files/tw-864949_02.jpg?v=1757012720960)
-    `,
-              backgroundSize: '100% 100%',
-              backgroundPosition: 'center',
-              height: !isDesktop ? '400px' : '33.33%',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'flex-end',
-              padding: '32px',
-              transition: 'background-size 0.8s ease-in-out',
-              cursor: 'pointer',
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.backgroundSize =
-                '110% 110%';
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.backgroundSize =
-                '100% 100%';
-            }}
-          >
-            <Row gutter={16}>
-              <Col xs={24} md={17}>
-                <Typography.Title
-                  level={!isLargeDesktop ? 5 : 4}
-                  style={{ color: '#fff' }}
-                >
-                  Pote Tupperware Instantânea Mágica Harry Potter Hogwarts 2,25L
-                  Preto
-                </Typography.Title>
-              </Col>
-              {isDesktop && (
-                <Col
-                  span={7}
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    flexDirection: 'column',
-                    gap: 8,
-                  }}
-                >
-                  <Typography.Title
-                    style={{
-                      color: '#fff',
-                      backgroundColor: COLORS.primary,
-                      padding: 8,
-                      borderRadius: TOKENS.border_radius,
-                      margin: 0,
-                      width: 'fit-content',
-                    }}
-                    level={5}
-                  >
-                    R$ 89,90
-                  </Typography.Title>
-                  <Typography.Title
-                    level={4}
-                    style={{
-                      color: '#fff',
-                      backgroundColor: COLORS.primary,
-                      padding: 8,
-                      borderRadius: TOKENS.border_radius,
-                      margin: 0,
-                      width: 'fit-content',
-                    }}
-                  >
-                    R$ 89,90
-                  </Typography.Title>
-                </Col>
-              )}
-            </Row>
-          </Col>
-          <Col
-            span={24}
-            style={{
-              backgroundImage: `
-      linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0)),
-      url(https://www.tupperware.com.br/cdn/shop/files/tw-864949_02.jpg?v=1757012720960)
-    `,
-              backgroundSize: '100% 100%',
-              backgroundPosition: 'center',
-              height: !isDesktop ? '400px' : '33.33%',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'flex-end',
-              padding: '32px',
-              transition: 'background-size 0.8s ease-in-out',
-              cursor: 'pointer',
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.backgroundSize =
-                '110% 110%';
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.backgroundSize =
-                '100% 100%';
-            }}
-          >
-            <Row gutter={16}>
-              <Col xs={24} md={17}>
-                <Typography.Title
-                  level={!isLargeDesktop ? 5 : 4}
-                  style={{ color: '#fff' }}
-                >
-                  Pote Tupperware Instantânea Mágica Harry Potter Hogwarts 2,25L
-                  Preto
-                </Typography.Title>
-              </Col>
-              {isDesktop && (
-                <Col
-                  span={7}
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    flexDirection: 'column',
-                    gap: 8,
-                  }}
-                >
-                  <Typography.Title
-                    style={{
-                      color: '#fff',
-                      backgroundColor: COLORS.primary,
-                      padding: 8,
-                      borderRadius: TOKENS.border_radius,
-                      margin: 0,
-                      width: 'fit-content',
-                    }}
-                    level={5}
-                  >
-                    R$ 89,90
-                  </Typography.Title>
-                  <Typography.Title
-                    level={4}
-                    style={{
-                      color: '#fff',
-                      backgroundColor: COLORS.primary,
-                      padding: 8,
-                      borderRadius: TOKENS.border_radius,
-                      margin: 0,
-                      width: 'fit-content',
-                    }}
-                  >
-                    R$ 89,90
-                  </Typography.Title>
-                </Col>
-              )}
-            </Row>
-          </Col>
-          <Col
-            span={24}
-            style={{
-              backgroundImage: `
-      linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0)),
-      url(https://www.tupperware.com.br/cdn/shop/files/tw-864949_02.jpg?v=1757012720960)
-    `,
-              backgroundSize: '100% 100%',
-              backgroundPosition: 'center',
-              height: !isDesktop ? '400px' : '33.33%',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'flex-end',
-              padding: '32px',
-              transition: 'background-size 0.8s ease-in-out',
-              cursor: 'pointer',
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.backgroundSize =
-                '110% 110%';
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.backgroundSize =
-                '100% 100%';
-            }}
-          >
-            <Row gutter={16}>
-              <Col xs={24} md={17}>
-                <Typography.Title
-                  level={!isLargeDesktop ? 5 : 4}
-                  style={{ color: '#fff' }}
-                >
-                  Pote Tupperware Instantânea Mágica Harry Potter Hogwarts 2,25L
-                  Preto
-                </Typography.Title>
-              </Col>
-              {isDesktop && (
-                <Col
-                  span={7}
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    flexDirection: 'column',
-                    gap: 8,
-                  }}
-                >
-                  <Typography.Title
-                    style={{
-                      color: '#fff',
-                      backgroundColor: COLORS.primary,
-                      padding: 8,
-                      borderRadius: TOKENS.border_radius,
-                      margin: 0,
-                      width: 'fit-content',
-                    }}
-                    level={5}
-                  >
-                    R$ 89,90
-                  </Typography.Title>
-                  <Typography.Title
-                    level={4}
-                    style={{
-                      color: '#fff',
-                      backgroundColor: COLORS.primary,
-                      padding: 8,
-                      borderRadius: TOKENS.border_radius,
-                      margin: 0,
-                      width: 'fit-content',
-                    }}
-                  >
-                    R$ 89,90
-                  </Typography.Title>
-                </Col>
-              )}
-            </Row>
-          </Col>
-        </Col>
+        ))}
       </Row>
     </Layout>
   );
