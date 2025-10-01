@@ -8,11 +8,6 @@ export const metadata: Metadata = {
   title: 'Bonatto revendas',
 };
 
-const items = Array.from({ length: 15 }).map((_, index) => ({
-  key: index + 1,
-  label: `nav ${index + 1}`,
-}));
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -47,7 +42,9 @@ export default function RootLayout({
             minHeight: 280,
             padding: 24,
           }}
-        ></div>
+        >
+          {children}
+        </div>
       </Content>
       <Footer
         style={{
