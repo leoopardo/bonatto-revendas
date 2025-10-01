@@ -30,7 +30,7 @@ export default function RootLayout({
           src="https://i.imgur.com/7FaEC0r.png"
           alt="logo"
           style={{
-            height: '250px',
+            height: '300px',
           }}
         />
 
@@ -40,7 +40,6 @@ export default function RootLayout({
         <div
           style={{
             minHeight: 280,
-            padding: 24,
           }}
         >
           {children}

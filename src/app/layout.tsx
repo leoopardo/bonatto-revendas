@@ -2,6 +2,28 @@ import { COLORS } from '@/theme/colors';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import { ConfigProvider } from 'antd';
 import type { Metadata } from 'next';
+import localFont from 'next/font/local';
+
+const minhaFonte = localFont({
+  src: [
+     {
+      path: '../../public/fonts/SF-Pro-Rounded-Light.otf',
+      weight: '200',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/SF-Pro-Rounded-Medium.otf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/SF-Pro-Rounded-Bold.otf',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Next Auth Template',
@@ -30,6 +52,7 @@ export default function RootLayout({
                 colorPrimary: COLORS.primary,
                 borderRadius: 24,
                 size: 24,
+                fontFamily: minhaFonte.style.fontFamily
               },
               components: {
                 Menu: {
