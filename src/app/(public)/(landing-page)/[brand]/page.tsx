@@ -1,7 +1,11 @@
-import React from 'react'
+interface BrandPageProps {
+  params: Promise<{
+    brand: string
+  }>
+  searchParams?: Promise<Record<string, string | string[] | undefined>>
+}
 
-export default function BrandPage ({ params }: { params: { brand: string } }) {
-  return (
-    <div>{params.brand}</div>
-  )
+export default async function BrandPage({ params }: BrandPageProps) {
+  const { brand } = await params
+  return <div>{brand}</div>
 }

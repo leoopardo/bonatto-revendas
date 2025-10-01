@@ -59,8 +59,6 @@ export const SideMenu = () => {
     setCurrent(window.location.pathname.split("/").join(""));
   }, []);
 
-  console.log(window.location.pathname)
-
   const onClick: MenuProps['onClick'] = (e) => {
     console.log('click ', e);
     setCurrent(e.key);
