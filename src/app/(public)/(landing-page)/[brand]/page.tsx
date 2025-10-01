@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function Boticario () {
+export default function BrandPage ({ params }: { params: { brand: string } }) {
   return (
-    <div>Boticario</div>
+    <div>{params.brand}</div>
   )
 }
