@@ -98,11 +98,14 @@ export const SideMenu = () => {
           onChange={(value) => {
             setSearch(value);
           }}
+          onClear={() => setSearch("")}
+          
         >
           <Input.Search
             size="large"
             placeholder="Procurar produto"
             height={30}
+            allowClear
           />
         </AutoComplete>
       )}
