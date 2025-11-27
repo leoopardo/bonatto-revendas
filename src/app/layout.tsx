@@ -3,10 +3,13 @@ import { AntdRegistry } from '@ant-design/nextjs-registry';
 import { ConfigProvider } from 'antd';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+import { Theme } from '@radix-ui/themes';
+import "@radix-ui/themes/styles.css";
+
 
 const minhaFonte = localFont({
   src: [
-     {
+    {
       path: '../../public/fonts/SF-Pro-Rounded-Light.otf',
       weight: '200',
       style: 'normal',
@@ -38,34 +41,34 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body
         style={{
-          backgroundColor: COLORS.base,
-          color: '#fff',
           fontFamily: 'Arial, sans-serif',
           padding: 0,
           margin: 0,
         }}
       >
-        <AntdRegistry>
-          <ConfigProvider
-            theme={{
-              token: {
-                colorPrimary: COLORS.primary,
-                borderRadius: 24,
-                size: 24,
-                fontFamily: minhaFonte.style.fontFamily
-              },
-              components: {
-                Menu: {
-                  colorText: '#fff',
-                  colorPrimary: COLORS.base,
-                  fontSize: 20,
+        <Theme accentColor="violet" radius="large" grayColor='slate'>
+          <AntdRegistry>
+            <ConfigProvider
+              theme={{
+                token: {
+                  colorPrimary: COLORS.primary,
+                  borderRadius: 24,
+                  size: 24,
+                  fontFamily: minhaFonte.style.fontFamily,
                 },
-              },
-            }}
-          >
-            {children}
-          </ConfigProvider>
-        </AntdRegistry>
+                components: {
+                  Menu: {
+                    colorText: '#fff',
+                    colorPrimary: COLORS.base,
+                    fontSize: 20,
+                  },
+                },
+              }}
+            >
+              {children}
+            </ConfigProvider>
+          </AntdRegistry>
+        </Theme>
       </body>
     </html>
   );

@@ -7,8 +7,8 @@ import { useState, useEffect, useRef } from 'react';
 
 type Product = {
   title: string;
-  price: string;
-  promotionalPrice?: string;
+  price: number;
+  promotionalPrice?: number;
   image: string;
 };
 
@@ -29,9 +29,8 @@ export function ProductCard({
   const [inView, setInView] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // IntersectionObserver para mobile
   useEffect(() => {
-    if (isDesktop) return; // só mobile
+    if (isDesktop) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {

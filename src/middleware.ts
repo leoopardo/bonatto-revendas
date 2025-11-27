@@ -3,11 +3,11 @@ import { MiddlewareConfig, NextRequest, NextResponse } from 'next/server';
 const publicRoutes = [
   { path: '/login', doWhenAuth: 'redirect' },
   { path: '/register', doWhenAuth: 'redirect' },
-  { path: '/', doWhenAuth: 'skip' },
   { path: '/tupperware', doWhenAuth: 'skip' },
   { path: '/boticario', doWhenAuth: 'skip' },
   { path: '/demillus', doWhenAuth: 'skip' },
   { path: '/jequiti', doWhenAuth: 'skip' },
+  { path: '/produtos', doWhenAuth: 'skip' },
 
 ] as const;
 
@@ -16,8 +16,8 @@ const REDIRECT_WHEN_AUTH_ROUTE = '/auth';
 
 export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
-  const isPublicRoute = publicRoutes.find((route) => route.path === path);
-  const authToken = request.cookies.get('token');
+  const isPublicRoute = path === '/' ? { path: '/', doWhenAuth: 'skip' } : publicRoutes.find((route) => path.startsWith(route.path));
+  const authToken = request.cookies.get('sb-auth-token');
 
   if (isPublicRoute && !authToken) {
     return NextResponse.next();

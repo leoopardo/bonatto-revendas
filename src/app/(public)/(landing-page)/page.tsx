@@ -3,52 +3,112 @@
 import { useBreakpoints } from '@/hooks/useBreakpoints';
 import { Layout, Row, Col } from 'antd';
 import { ProductCard } from './components/productCard';
+import { useListProducts } from '../../../../services/products/listProducts';
+import RotatingText from '../../../../components/RotatingText/RotatingText';
+import { Box, Card, Flex, Inset, Strong, Text } from '@radix-ui/themes';
+import { COLORS } from '@/theme/colors';
+import { formatCurrency } from '../../../../utils/formater';
+import Link from 'next/link';
 
 export default function LandingPage() {
   const { isDesktop, isLargeDesktop } = useBreakpoints();
+  const { products } = useListProducts();
 
-  const products = [
-    {
-      title: 'Harry Potter Hogwarts 2,25L Preto',
-      price: 'R$ 119,90',
-      promotionalPrice: 'R$ 89,90',
-      image:
-        'https://www.tupperware.com.br/cdn/shop/files/tw-864126-01.jpg?v=1755106499960',
-    },
-    {
-      title: 'Harry Potter 1,3L Colorido',
-      price: 'R$ 69,90',
-      promotionalPrice: 'R$ 74,90',
-      image:
-        'https://www.tupperware.com.br/cdn/shop/files/tw-864952_01.jpg?v=1757012853960',
-    },
-    {
-      title: 'Pote Tupperware Marvel Avengers 2,25L',
-      price: 'R$ 79,90',
-      image:
-        'https://www.tupperware.com.br/cdn/shop/files/tw-864950_01_0fb949b4-07f7-48e9-b4e9-a92a5e5e7deb.jpg?v=1757012769960',
-    },
-  ];
+  const mockProducts = products.map((product) => ({
+    title: product.name,
+    price: product.original_value,
+    promotionalPrice:
+      product.pomotion_max_date < new Date()
+        ? product.promotional_value
+        : undefined,
+    image: product.images[0],
+  }));
 
   return (
-    <Layout style={{ width: '100%', height: 'calc(100vh - 12dvh)' }}>
-      <Row style={{ height: '100%', width: '100%', display: 'flex' }}>
-        {products.map((product, index) => (
-          <Col
-            key={index}
-            xs={24}
-            md={8}
-            style={{ height: isDesktop ? '100%' : 'fit-content' }}
-          >
-            <ProductCard
-              product={product}
-              isDesktop={isDesktop}
-              isLargeDesktop={isLargeDesktop}
-              height="100%"
-            />
-          </Col>
+    <Flex
+      style={{
+        width: '100%',
+        height: 'calc(100vh - 20dvh)',
+        backgroundColor: '#fff',
+        padding: '16px',
+      }}
+      direction="column"
+      gap="8"
+    >
+      <Flex
+        direction={isDesktop ? 'row' : 'column'}
+        justify={isDesktop ? 'center' : 'start'}
+        align={isDesktop ? 'start' : 'center'}
+        mt="8"
+      >
+        <Text size={isDesktop ? '9' : '9'} style={{ padding: 18 }}>
+          Compre
+        </Text>
+        <Text
+          size={isDesktop ? '9' : '9'}
+          style={{
+            backgroundColor: COLORS.secondary,
+            padding: 18,
+            borderRadius: 8,
+            overflow: 'hidden',
+            height: 'max-content',
+          }}
+        >
+          <RotatingText
+            texts={['O Boticário', 'Demillus', 'Tupperware', 'Jequiti']}
+            mainClassName="px-2 sm:px-2 md:px-3 bg-cyan-300 text-black overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
+            staggerFrom={'last'}
+            initial={{ y: '-120%', opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: '120%', opacity: 0 }}
+            staggerDuration={0.025}
+            splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+            transition={{ type: 'spring', damping: 30, stiffness: 400 }}
+            rotationInterval={3000}
+          />
+        </Text>
+      </Flex>
+      <Flex style={{ width: '100%' }} justify="center">
+        {products.map((product) => (
+          <Box maxWidth="300px">
+            <Link href={`/produtos/${product.id}`}>
+              <Card size="2">
+                <Inset clip="padding-box" side="top" pb="current">
+                  <img
+                    src={product.images[0]}
+                    alt="Bold typography"
+                    style={{
+                      display: 'block',
+                      objectFit: 'cover',
+                      width: '100%',
+                      height: '100%',
+                      backgroundColor: 'var(--gray-5)',
+                    }}
+                  />
+                </Inset>
+                <Flex direction="column" gap="4">
+                  <Text as="p" size="4">
+                    <Strong>{product.name}</Strong>
+                  </Text>
+                  <Text
+                    size="4"
+                    style={{
+                      backgroundColor: COLORS.secondary,
+                      width: 'max-content',
+                      padding: '4px',
+                      borderRadius: '4px',
+                      color: '#000',
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    {formatCurrency(product.original_value)}
+                  </Text>
+                </Flex>
+              </Card>
+            </Link>
+          </Box>
         ))}
-      </Row>
-    </Layout>
+      </Flex>
+    </Flex>
   );
 }

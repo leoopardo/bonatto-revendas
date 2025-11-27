@@ -3,6 +3,7 @@ import { Layout } from 'antd';
 import { Content, Footer, Header } from 'antd/es/layout/layout';
 import type { Metadata } from 'next';
 import { SideMenu } from './components/menu';
+import { Box, Card } from '@radix-ui/themes';
 
 export const metadata: Metadata = {
   title: 'Bonatto revendas',
@@ -15,46 +16,10 @@ export default function RootLayout({
 }>) {
   return (
     <Layout>
-      <Header
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          backgroundColor: COLORS.primary,
-          height: '12dvh',
-          borderBottom: `12px solid ${COLORS.secondary}`,
-          gap: 4
-        }}
-      >
-        <img
-          src="https://i.imgur.com/TZE9dkO.png"
-          alt="logo"
-          style={{
-            height: 'calc(50px + 2dvw)',
-            paddingRight: 48
-          }}
-        />
+      <Box style={{height: "100px", width: "100%", backgroundColor: "#f5f5f5"}}>
 
-        <SideMenu />
-      </Header>
-      <Content style={{ minHeight: '90dvh', backgroundColor: '#e8e4da' }}>
-        <div
-          style={{
-            minHeight: 280,
-          }}
-        >
-          {children}
-        </div>
-      </Content>
-      <Footer
-        style={{
-          textAlign: 'center',
-          backgroundColor: COLORS.dark,
-          color: '#fff',
-        }}
-      >
-        Bonatto revendas ©{new Date().getFullYear()} Created by @leoopardo
-      </Footer>
+      </Box>
+      {children}
     </Layout>
   );
 }
