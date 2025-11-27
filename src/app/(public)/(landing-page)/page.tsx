@@ -1,28 +1,16 @@
 'use client';
 
 import { useBreakpoints } from '@/hooks/useBreakpoints';
-import { Layout, Row, Col } from 'antd';
-import { ProductCard } from './components/productCard';
-import { useListProducts } from '../../../../services/products/listProducts';
-import RotatingText from '../../../../components/RotatingText/RotatingText';
-import { Box, Card, Flex, Inset, Strong, Text } from '@radix-ui/themes';
 import { COLORS } from '@/theme/colors';
-import { formatCurrency } from '../../../../utils/formater';
+import { Box, Card, Flex, Inset, Strong, Text } from '@radix-ui/themes';
 import Link from 'next/link';
+import RotatingText from '../../../../components/RotatingText/RotatingText';
+import { useListProducts } from '../../../../services/products/listProducts';
+import { formatCurrency } from '../../../../utils/formater';
 
 export default function LandingPage() {
-  const { isDesktop, isLargeDesktop } = useBreakpoints();
+  const { isDesktop } = useBreakpoints();
   const { products } = useListProducts();
-
-  const mockProducts = products.map((product) => ({
-    title: product.name,
-    price: product.original_value,
-    promotionalPrice:
-      product.pomotion_max_date < new Date()
-        ? product.promotional_value
-        : undefined,
-    image: product.images[0],
-  }));
 
   return (
     <Flex
@@ -70,7 +58,7 @@ export default function LandingPage() {
       </Flex>
       <Flex style={{ width: '100%' }} justify="center">
         {products.map((product) => (
-          <Box maxWidth="300px">
+          <Box maxWidth="300px" key={product.id}>
             <Link href={`/produtos/${product.id}`}>
               <Card size="2">
                 <Inset clip="padding-box" side="top" pb="current">

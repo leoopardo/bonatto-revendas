@@ -3,7 +3,7 @@
 import { LockClosedIcon, PersonIcon } from '@radix-ui/react-icons';
 import { Box, Button, Card, Flex, Text, TextField } from '@radix-ui/themes';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Aurora from '../../../../components/Aurora';
 import { createClient } from '../../../../utils/supabase/client'; // Import correto
 
@@ -17,15 +17,6 @@ export default function Login() {
 
   const router = useRouter();
   const supabase = createClient(); 
-
-  const getSession = async () => {
-    const { data, error } = await supabase.auth.getSession();
-    console.log('Sessão:', data, error);
-  }
-
-  useEffect(() => {
-getSession()
-  }, [])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
